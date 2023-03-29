@@ -9,6 +9,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.awt.print.Book;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -81,6 +82,21 @@ class BookRepositoryTest {
             review = reviewRepository.save(review);
             System.out.println(review);
         });
+    }
+
+    @Rollback(value = false)
+    @Transactional
+    @Test
+    void reviewUpdateTest() {
+        var review = reviewRepository.findById(7L);
+
+        review.ifPresent(r->{
+            var book = r.getBooks();
+            book.setTitle("박하사탕 1편");
+            var updateReview = reviewRepository.save(r);
+            System.out.println(updateReview.getBooks().getTitle());
+        });
+
     }
 
 

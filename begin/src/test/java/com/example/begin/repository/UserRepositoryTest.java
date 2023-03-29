@@ -5,10 +5,14 @@ import com.example.begin.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -71,5 +75,49 @@ class UserRepositoryTest {
         user.ifPresent(u->{
             u.getReviews().forEach(System.out::println);
         });
+    }
+
+    @Test
+    void addDummyUserTest() {
+
+        var user1 = User.builder().userId("cocomo1")
+                .userPw("1234")
+                .addr("Tokyo1")
+                .nick("angel")
+                .build();
+
+        var user2 = User.builder().userId("cocomo2")
+                .userPw("1234")
+                .addr("Tokyo2")
+                .nick("angel")
+                .build();
+
+        var user3 = User.builder().userId("cocomo3")
+                .userPw("1234")
+                .addr("Tokyo3")
+                .nick("angel")
+                .build();
+
+        var users = Arrays.asList(user1, user2, user3);
+        userRepository.saveAll(users);
+
+        var findUsers = userRepository.findByNickLike("angel%");
+        findUsers.ifPresent(s->{
+            System.out.println(s);
+        });
+
+    }
+
+    @Test
+    void pageableTest() {
+        Pageable pageable = PageRequest.of(0, 2, Sort.by(Sort.Order.desc("idx")));
+        var pageOpt = userRepository.findByNickLike("angel%", pageable);
+        pageOpt.ifPresent(pages->{
+            System.out.println(pages.getTotalPages());
+            pages.getContent().forEach(System.out::println);
+            System.out.println(pages.getTotalElements());
+
+        });
+
     }
 }

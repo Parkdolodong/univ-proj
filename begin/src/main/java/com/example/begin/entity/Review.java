@@ -27,7 +27,7 @@ public class Review implements DateListener {
     @JoinColumn(name = "user_idx")
     private User user;
 
-    @ManyToOne(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
     @JoinColumn(name = "books_idx")
     private Books books;
 
