@@ -6,19 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+import java.awt.print.Book;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BookRepositoryTest {
+
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     ReviewRepository reviewRepository;
-
     @Autowired
     BookRepository bookRepository;
 
@@ -35,7 +35,7 @@ class BookRepositoryTest {
     @Test
     void reviewTest() {
         var userOptional = userRepository.findByNick("reloadUp");
-        userOptional.ifPresent(user -> {
+        userOptional.ifPresent(user->{
             var review = Review.builder().title("good foods")
                     .contents("so kind!")
                     .user(user)
@@ -49,13 +49,14 @@ class BookRepositoryTest {
     @Rollback(value = false)
     @Transactional
     @Test
-    void findByReviewTest() {
+    void findMyReviewTest() {
         var userOpt = userRepository.findByNick("reloadUp");
         userOpt.ifPresent(user -> {
             user.getReviews().forEach(review -> {
+
                 System.out.println(review.getBooks().getTitle());
             });
-//            user.getReviews().forEach(System.out::println);
+            //user.getReviews().forEach(System.out::println);
         });
     }
 
@@ -63,14 +64,15 @@ class BookRepositoryTest {
     @Transactional
     @Test
     void reviewCascadeTest() {
-        var book = Books.builder().publisher("deagaUniv")
+
+        var book = Books.builder().publisher("daegaUniv")
                 .title("Spring 정복")
                 .build();
 
         var userOptional = userRepository.findByNick("developer");
 
-        userOptional.ifPresent(user -> {
-            var review = Review.builder().title("good foods")
+        userOptional.ifPresent(user->{
+            var review = Review.builder().title("so easy~")
                     .contents("so kind!")
                     .user(user)
                     .books(book)
@@ -80,4 +82,6 @@ class BookRepositoryTest {
             System.out.println(review);
         });
     }
+
+
 }

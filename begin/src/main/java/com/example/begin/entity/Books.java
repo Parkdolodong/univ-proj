@@ -14,11 +14,14 @@ import java.util.List;
 @Data
 @Builder
 @Entity
-@EntityListeners(value = {LibraryEntityListener.class})
+@EntityListeners(value = { LibraryEntityListener.class })
 public class Books implements DateListener {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
+
+    private String title;
+    private String publisher;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "books")
@@ -28,8 +31,6 @@ public class Books implements DateListener {
         this.reviews.add(review);
     }
 
-    private String title;
-    private String publisher;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
