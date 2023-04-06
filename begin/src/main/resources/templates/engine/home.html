@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome [[${userinfo.nick}]]</title>
+</head>
+<body>
+   <div>환영합니다.</div>
+   <div>
+       <span th:text="|로그인한 ID는 ${userinfo.userId}|"></span>
+       <span th:text="|로그인한 주소는 ${userinfo.addr}|"></span>
+   </div>
+</body>
+</html>

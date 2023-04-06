@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>맛집 WISH LIST</title>
+  </head>
+
+  <body>
+    <br />
+
+    <div class="container">
+      <!-- search -->
+      <div class="row">
+        <div>
+          <input
+            id="searchBox"
+            type="text"
+            placeholder="맛집을 검색해주세요 ex.(판교 갈비집)"
+            value="갈비집"
+          />
+        </div>
+        <div>
+          <button id="searchButton" type="button">검색</button>
+        </div>
+      </div>
+
+      <br />
+      <!-- search result -->
+
+      <div class="row" id="search-result" style="visibility: hidden">
+        <div>
+          <img
+            id="wish_image"
+            src=""
+            alt="..."
+            class="img-thumbnail"
+            style="width: 300px; height: 300px"
+          />
+        </div>
+        <div>
+          <ul>
+            <li class="list-group-item" id="wish_title"></li>
+            <li class="list-group-item" id="wish_category"></li>
+            <li class="list-group-item" id="wish_address"></li>
+            <li class="list-group-item" id="wish_road_address"></li>
+            <li class="list-group-item">
+              <a id="wish_link" target="_blank" href="">홈페이지</a>
+            </li>
+          </ul>
+          <button id="wishButton" type="button" class="btn">
+            위시리스트 추가
+          </button>
+        </div>
+      </div>
+
+      <br /><br /><br />
+
+      <div class="row">
+        <div class="" style="text-align: center">나의 맛집 리스트</div>
+      </div>
+
+      <br />
+      <div id="wish-list"></div>
+      <button class="item1">test</button>
+    </div>
+    <!-- container end -->
+  </body>
+
+  <script src="/js/myfood.js"></script>
+</html>

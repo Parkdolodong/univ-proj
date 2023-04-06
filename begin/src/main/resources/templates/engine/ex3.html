@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex3</title>
+</head>
+<body>
+    <h1 th:text="${result}"></h1>
+    <span th:text="${key}"></span>
+    <div th:text="${user}"></div>
+
+    <script th:inline="javascript">
+        let result = [[${result}]];
+        let userId = [[${user.userId}]]
+        console.log(result+" : "+userId);
+    </script>
+
+
+
+</body>
+</html>
